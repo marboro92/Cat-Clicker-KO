@@ -19,19 +19,45 @@ var Cat = function(data) {
 	}, this);
 }
 
+var initialCats = [
+{
+	clickCount: 0,
+	name: 'Tabby',
+	imgSrc: 'img/434164568_fea0ad4013_z.jpg',
+	imgAttribution: 'https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/m-3394860566',
+	nicknames: ['Tabtab', 'T-bone', 'Mr.T']
+},
+{
+	clickCount: 0,
+	name: 'Tiger',
+	imgSrc: 'img/4154543904_6e2428c421_z.jpg',
+	imgAttribution: 'https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/m-3394860566',
+	nicknames: ['Tigger']
+},
+{
+	clickCount: 0,
+	name: 'Scaredy',
+	imgSrc: 'img/22252709_010df3379e_z.jpg',
+	imgAttribution: 'https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/m-3394860566',
+	nicknames: ['Casper']
+}]
 
+// [!!] Make the cats show up on a list
+// [  ] Make the currentCat change when clicked
 var ViewModel = function() {
-	//keep outer this, less confusinsing, sometimes that is used
+	//keep outer this, less confusing, sometimes that is used
 	var self= this;
 	//creat all sorts of cats
-	this.currentCat = ko.observable(new Cat({
-		clickCount: 0,
-		name: 'Tabby',
-		imgSrc: 'img/434164568_fea0ad4013_z.jpg',
-		imgAttribution: 'https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/m-3394860566',
-		nicknames: ['Tabtab', 'T-bone', 'Mr.T']
-	}) );	
-
+	self.catList = ko.observableArray([]);
+	initialCats.forEach(function(catItem){
+		self.catList.push(new Cat(catItem) );
+	});
+	//access first cat
+	self.currentCat = ko.observable( this.catList()[0] );	
+	//update cat if clicked
+	self.update= function(clickedCat) {
+		self.currentCat(clickedCat);
+	};
 
 	this.incrementCounter = function() {
 		self.currentCat().clickCount(self.currentCat().clickCount() + 1);
