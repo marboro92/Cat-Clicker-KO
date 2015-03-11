@@ -1,9 +1,11 @@
 var ViewModel = function() {
+	//keep outer this, less confusinsing, sometimes that is used
+	var self= this;
 	this.currentCat = ko.observable(new Cat());	
 
 
 	this.incrementCounter = function() {
-		this.clickCount(this.clickCount() + 1);
+		self.currentCat().clickCount(self.currentCat().clickCount() + 1);
 	};
 	
 }
