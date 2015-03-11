@@ -1,14 +1,20 @@
 var ViewModel = function() {
-	//define model data here for now
-	this.clickCount = ko.observable(0);
-	this.name = ko.observable('Tabby');
-;	this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
-	this.imgAttribution = ko.observable('https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/m-3394860566');
-	this.nicknames = ko.observableArray(['Tabtab', 'T-bone', 'Mr.T']);
+	this.currentCat = ko.observable(new Cat());	
+
 
 	this.incrementCounter = function() {
-		this.clickCount(this.clickCount() + 1);
+		this.currentCat().clickCount(this.currentCat().clickCount() + 1);
 	};
+	
+}
+
+var Cat = function() {
+		//define model data here for now
+	this.clickCount = ko.observable(0);
+	this.name = ko.observable('Tabby');
+	this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
+	this.imgAttribution = ko.observable('https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/m-3394860566');
+	this.nicknames = ko.observableArray(['Tabtab', 'T-bone', 'Mr.T']);
 	this.level = ko.computed(function() {
 		var level;
 		var clicks = this.clickCount();
