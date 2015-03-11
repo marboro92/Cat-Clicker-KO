@@ -3,7 +3,7 @@ var ViewModel = function() {
 
 
 	this.incrementCounter = function() {
-		this.currentCat().clickCount(this.currentCat().clickCount() + 1);
+		this.clickCount(this.clickCount() + 1);
 	};
 	
 }
